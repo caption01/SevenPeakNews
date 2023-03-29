@@ -2,17 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 
 import * as CSStype from '@/component/utils/csstype';
+import { ColorKey } from '@/component/utils/color';
 
 interface InputStyleProps {
   fontSize?: CSStype.FontSize;
-  color?: CSStype.Color;
+  color?: ColorKey;
 }
 
 interface InputProps extends InputStyleProps {
   value?: string;
   placeholder?: string;
-  onChange: (value: string) => void;
+  autoFocus?: boolean;
   style?: React.CSSProperties;
+  onChange: (value: string) => void;
 }
 
 const StyledInput = styled.input<InputStyleProps>`
@@ -26,6 +28,10 @@ const StyledInput = styled.input<InputStyleProps>`
   width: 100%;
   font-size: ${({ fontSize }) => fontSize};
   color: ${({ color }) => color};
+
+  &::placeholder {
+    color: ${({ color }) => color};
+  }
 `;
 
 const Input = ({
@@ -33,6 +39,7 @@ const Input = ({
   placeholder = '',
   fontSize = '2rem',
   color = 'black',
+  autoFocus = true,
   onChange,
   style,
   ...props
@@ -50,6 +57,7 @@ const Input = ({
       fontSize={fontSize}
       color={color}
       style={style}
+      autoFocus={autoFocus}
       {...props}
     />
   );

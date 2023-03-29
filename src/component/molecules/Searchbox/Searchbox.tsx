@@ -10,40 +10,58 @@ interface BoxStyledProps {
 const Box = styled.div<BoxStyledProps>`
   position: relative;
   display: flex;
-  justify-content: center;
+  align-items: center;
   cursor: pointer;
 
   padding: 1rem 1.5rem;
   width: ${({ active }) => (active ? '30rem' : '10rem')};
+  height: 5rem;
   background-color: ${({ active, theme }) => active && theme.colors.skyBlue};
+  opacity: ${({ active }) => active && 0.8};
   border-bottom: ${({ theme }) => `0.3rem solid ${theme.colors.white}`};
+  border-radius: 0.2rem;
 
   transition: all 0.3s;
 `;
 
+const IconWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 5rem;
+  transform: translate(50%, -50%);
+`;
+
 const Searchbox = () => {
   const [active, setActive] = useState(false);
+  const [search, setSearch] = useState('');
 
   const onSearchboxChange = (value: string) => {
-    console.log({ value });
+    setSearch(value);
   };
 
-  const toggle = () => {
-    setActive(!active);
+  const open = () => {
+    setActive(true);
+  };
+
+  const close = () => {
+    setActive(false);
   };
 
   return (
-    <Box onClick={() => toggle()} active={active}>
+    <Box active={active} onBlur={() => close()}>
       {active && (
         <Input
-          value="hello"
+          value={search}
           placeholder="Search all news"
           onChange={onSearchboxChange}
           fontSize="2rem"
-          color=""
+          color="white"
+          autoFocus
         />
       )}
-      <Icon name="search" size={'2.2rem'} />
+      <IconWrapper onClick={() => open()}>
+        <Icon name="search" size={'3rem'} />
+      </IconWrapper>
     </Box>
   );
 };
