@@ -6,7 +6,7 @@ import { StyledProvider } from '@/component/utils/styled-component';
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <StyledProvider>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </StyledProvider>
   );
 }
