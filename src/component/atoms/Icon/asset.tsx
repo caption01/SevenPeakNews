@@ -1,15 +1,22 @@
 import React from 'react';
 
 import * as CSSType from '../../utils/csstype';
+import { ColorKey } from '@/component/utils/color';
 
 export interface IconProps {
-  size?: CSSType.Width;
-  color?: CSSType.Color;
+  size: CSSType.Width;
+  color: ColorKey;
   style?: React.CSSProperties;
   onClick?: () => void;
 }
 
-export const SearchIcon = ({ size = '2rem', style, ...props }: IconProps) => {
+export const SearchIcon = ({
+  size,
+  color,
+  style,
+  onClick,
+  ...props
+}: IconProps) => {
   return (
     <svg
       width={size}
@@ -18,6 +25,7 @@ export const SearchIcon = ({ size = '2rem', style, ...props }: IconProps) => {
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
+      onClick={onClick}
       style={style}
       {...props}
     >
@@ -44,11 +52,34 @@ export const SearchIcon = ({ size = '2rem', style, ...props }: IconProps) => {
               <mask id="mask-2" fill="white">
                 <use xlinkHref="#path-1"></use>
               </mask>
-              <use fill="#FAFAFA" fill-rule="evenodd" xlinkHref="#path-1"></use>
+              <use fill={color} fill-rule="evenodd" xlinkHref="#path-1"></use>
             </g>
           </g>
         </g>
       </g>
+    </svg>
+  );
+};
+
+export const Triangle = ({
+  size,
+  color,
+  style,
+  onClick,
+  ...props
+}: IconProps) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      fill={color}
+      viewBox="0 0 24 24"
+      style={style}
+      onClick={onClick}
+      {...props}
+    >
+      <path d="M24 22h-24l12-20z" />
     </svg>
   );
 };

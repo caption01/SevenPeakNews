@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { SearchIcon, IconProps } from './asset';
+import { SearchIcon, Triangle, IconProps } from './asset';
 
 const assets = {
   search: SearchIcon,
+  triangle: Triangle,
 };
 
 export interface IconsProps extends IconProps {
@@ -13,7 +14,7 @@ export interface IconsProps extends IconProps {
 const Icon = ({
   name,
   size = '2rem',
-  color,
+  color = 'black',
   style,
   onClick,
   ...props
