@@ -1,10 +1,10 @@
 import React from 'react';
 
-import * as cssType from '../../utils/csstype';
+import * as CSSType from '../../utils/csstype';
 
 export interface IconProps {
-  size?: cssType.width;
-  color?: cssType.color;
+  size?: CSSType.Width;
+  color?: CSSType.Color;
   style?: React.CSSProperties;
 }
 

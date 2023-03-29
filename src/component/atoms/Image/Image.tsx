@@ -1,7 +1,7 @@
 import React from 'react';
 import NextImage from 'next/image';
 
-import * as cssType from '../../utils/csstype';
+import * as CSSType from '../../utils/csstype';
 import { peakLogo } from './assets';
 
 const assets = {
@@ -12,7 +12,7 @@ interface ImageProps {
   name: keyof typeof assets;
   alt: string;
   style?: React.CSSProperties;
-  objectFit?: cssType.objectFit;
+  objectFit?: CSSType.ObjectFit;
 }
 
 const Image = ({

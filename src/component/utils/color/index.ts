@@ -1,5 +1,8 @@
 const colors = {
   darkBlue: '#00308F',
+  skyBlue: '#1974D2',
+  white: '#FFFFFF',
+  black: '000000',
 };
 
 type ColorObjectKey = keyof typeof colors;

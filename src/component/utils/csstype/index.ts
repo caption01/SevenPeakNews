@@ -1,5 +1,6 @@
 import type * as CSS from 'csstype';
 
-export type width = CSS.Property.Width;
-export type objectFit = CSS.Property.ObjectFit;
-export type color = CSS.Property.Color;
+export type Width = CSS.Property.Width;
+export type ObjectFit = CSS.Property.ObjectFit;
+export type Color = CSS.Property.Color;
+export type FontSize = CSS.Property.FontSize;
