@@ -61,7 +61,12 @@ const Searchbox = () => {
         />
       )}
       <IconWrapper>
-        <Icon name="search" size={'2.5rem'} onClick={() => open()} />
+        <Icon
+          name="search"
+          size={'2.5rem'}
+          color="white"
+          onClick={() => open()}
+        />
       </IconWrapper>
     </Box>
   );
