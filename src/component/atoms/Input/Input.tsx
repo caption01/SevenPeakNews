@@ -30,10 +30,10 @@ const StyledInput = styled.input<InputStyleProps>`
 
 const Input = ({
   value = '',
-  onChange = () => {},
   placeholder = '',
   fontSize = '2rem',
   color = 'black',
+  onChange,
   style,
   ...props
 }: InputProps) => {
