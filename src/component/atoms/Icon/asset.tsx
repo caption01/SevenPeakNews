@@ -6,6 +6,7 @@ export interface IconProps {
   size?: CSSType.Width;
   color?: CSSType.Color;
   style?: React.CSSProperties;
+  onClick?: () => void;
 }
 
 export const SearchIcon = ({ size = '2rem', style, ...props }: IconProps) => {

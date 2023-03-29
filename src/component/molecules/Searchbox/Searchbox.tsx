@@ -11,7 +11,6 @@ const Box = styled.div<BoxStyledProps>`
   position: relative;
   display: flex;
   align-items: center;
-  cursor: pointer;
 
   padding: 1rem 1.5rem;
   width: ${({ active }) => (active ? '30rem' : '10rem')};
@@ -48,19 +47,21 @@ const Searchbox = () => {
   };
 
   return (
-    <Box active={active} onBlur={() => close()}>
+    <Box active={active}>
       {active && (
         <Input
           value={search}
           placeholder="Search all news"
           onChange={onSearchboxChange}
+          onEnter={close}
           fontSize="2rem"
           color="white"
           autoFocus
+          onBlur={() => close()}
         />
       )}
-      <IconWrapper onClick={() => open()}>
-        <Icon name="search" size={'3rem'} />
+      <IconWrapper>
+        <Icon name="search" size={'2.5rem'} onClick={() => open()} />
       </IconWrapper>
     </Box>
   );

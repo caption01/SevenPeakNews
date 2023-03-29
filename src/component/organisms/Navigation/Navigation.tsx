@@ -5,6 +5,7 @@ import { Searchbox } from '@/component/molecules';
 import { Image } from '@/component/atoms';
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,15 +18,19 @@ const ImageContainer = styled.div`
   height: 15rem;
 `;
 
+const SearchboxContainer = styled.div`
+  align-self: flex-end;
+`;
+
 const Navigation = () => {
   return (
     <Container>
       <ImageContainer>
         <Image name="peakLogo" alt="logo" objectFit="contain" />
       </ImageContainer>
-      <div>
+      <SearchboxContainer>
         <Searchbox />
-      </div>
+      </SearchboxContainer>
     </Container>
   );
 };

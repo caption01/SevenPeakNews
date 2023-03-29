@@ -10,13 +10,26 @@ export interface IconsProps extends IconProps {
   name: keyof typeof assets;
 }
 
-const Icon = ({ name, size = '2rem', color, style, ...props }: IconsProps) => {
+const Icon = ({
+  name,
+  size = '2rem',
+  color,
+  style,
+  onClick,
+  ...props
+}: IconsProps) => {
   const icon = assets[name] || 'div';
+
+  const pointer = !!onClick ? 'pointer' : 'none';
 
   return React.createElement(icon, {
     size,
     color,
-    style,
+    onClick,
+    style: {
+      cursor: pointer,
+      ...style,
+    },
     ...props,
   });
 };

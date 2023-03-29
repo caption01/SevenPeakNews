@@ -15,6 +15,8 @@ interface InputProps extends InputStyleProps {
   autoFocus?: boolean;
   style?: React.CSSProperties;
   onChange: (value: string) => void;
+  onEnter?: () => void;
+  onBlur: () => void;
 }
 
 const StyledInput = styled.input<InputStyleProps>`
@@ -41,6 +43,8 @@ const Input = ({
   color = 'black',
   autoFocus = true,
   onChange,
+  onEnter,
+  onBlur,
   style,
   ...props
 }: InputProps) => {
@@ -49,15 +53,24 @@ const Input = ({
     onChange(inputValue);
   };
 
+  const handleOnKeyboardDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const key = e.key;
+    if (key === 'Enter') {
+      onEnter?.();
+    }
+  };
+
   return (
     <StyledInput
       value={value}
       onChange={handleOnInputChange}
+      onKeyDown={handleOnKeyboardDown}
       placeholder={placeholder}
       fontSize={fontSize}
       color={color}
       style={style}
       autoFocus={autoFocus}
+      onBlur={onBlur}
       {...props}
     />
   );
