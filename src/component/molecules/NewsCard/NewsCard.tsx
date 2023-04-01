@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Card, Image, Text, Spacer } from 'src/component/atoms';
+import { Card, Image, ImageProps, Text, Spacer } from 'src/component/atoms';
 import * as CSSType from 'src/component/utils/csstype';
 
 interface StyleDiv {
@@ -38,8 +38,32 @@ const NewsCard = ({
   alt = '',
   title = '',
   describe = '',
+  isShowPeakImage = false,
   ...props
 }) => {
+  let imageProps = {} as ImageProps;
+
+  if (image) {
+    imageProps = {
+      name: image,
+      alt: alt,
+      fill: true,
+    };
+  }
+
+  if (isShowPeakImage && !image) {
+    imageProps = {
+      name: 'peakLogo',
+      alt: alt,
+      objectFit: 'contain',
+      style: {
+        width: '70%',
+        height: '100%',
+        margin: 'auto',
+      },
+    };
+  }
+
   return (
     <Card
       width={width}
@@ -48,9 +72,9 @@ const NewsCard = ({
       backgroundColor={'darkBlue'}
       {...props}
     >
-      {image && (
+      {!!imageProps && (
         <ImageContainer height={height}>
-          <Image name={image} alt={alt} />
+          <Image {...imageProps} alt={imageProps.alt} />
         </ImageContainer>
       )}
       <TextContainer>

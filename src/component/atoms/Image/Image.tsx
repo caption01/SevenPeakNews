@@ -11,17 +11,19 @@ const assets = {
   newsImage: newsImage,
 };
 
-interface ImageProps {
+export interface ImageProps {
   name: string | AssetsKey;
   alt: string;
   style?: React.CSSProperties;
   objectFit?: CSSType.ObjectFit;
+  fill?: boolean;
 }
 
 const Image = ({
   name = '',
   alt = '',
-  objectFit = 'fill',
+  fill = false,
+  objectFit,
   style,
   ...props
 }: ImageProps) => {
@@ -37,7 +39,7 @@ const Image = ({
 
   return (
     <NextImage
-      fill
+      fill={fill}
       src={img}
       alt={alt}
       style={{ objectFit, ...style }}
