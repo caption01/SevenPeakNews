@@ -19,6 +19,7 @@ const TextContainer = styled.div`
   height: 15rem;
   background-color: ${({ theme }) => theme.colors.darkBlue};
   line-height: normal;
+  overflow: hidden;
 `;
 
 const SpacerContainer = styled.div`
