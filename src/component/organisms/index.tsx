@@ -1,2 +1,2 @@
 export { default as Navigation } from './Navigation/Navigation';
-export { default as NewsOverview } from './NewsOverview/NewsOverview';
+export { default as GridMainNews } from './GridMainNews/GridMainNews';

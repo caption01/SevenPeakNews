@@ -1,28 +1,39 @@
 import React from 'react';
-import NextImage from 'next/image';
+import NextImage, { StaticImageData } from 'next/image';
 
 import * as CSSType from '../../utils/csstype';
-import { peakLogo } from './assets';
+import { peakLogo, newsImage } from './assets';
+
+type AssetsKey = keyof typeof assets;
 
 const assets = {
   peakLogo: peakLogo,
+  newsImage: newsImage,
 };
 
 interface ImageProps {
-  name: keyof typeof assets;
+  name: string | AssetsKey;
   alt: string;
   style?: React.CSSProperties;
   objectFit?: CSSType.ObjectFit;
 }
 
 const Image = ({
-  name = 'peakLogo',
-  alt = 'image',
+  name = '',
+  alt = '',
   objectFit = 'fill',
   style,
   ...props
 }: ImageProps) => {
-  const img = assets[name];
+  let img;
+
+  if (isLocalAsset(name)) {
+    const localAsset = name as AssetsKey;
+    const localImage = assets[localAsset];
+    img = localImage;
+  } else {
+    img = name;
+  }
 
   return (
     <NextImage
@@ -34,5 +45,9 @@ const Image = ({
     />
   );
 };
+
+function isLocalAsset(name: string | AssetsKey): boolean {
+  return Object.keys(assets).includes(name);
+}
 
 export default Image;

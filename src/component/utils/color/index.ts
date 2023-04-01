@@ -3,6 +3,10 @@ const colors = {
   skyBlue: '#2767c2',
   white: '#FFFFFF',
   black: '000000',
+  red: '#ff0000',
+  green: '#00ff00',
+  yello: '#ffff00',
+  lightBlue: '#00ffff',
 };
 
 type ColorKey = keyof typeof colors;

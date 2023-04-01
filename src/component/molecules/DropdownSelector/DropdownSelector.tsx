@@ -29,6 +29,7 @@ interface SelectorProps {
 const SelectorContainer = styled.div`
   position: relative;
   min-width: 30rem;
+  cursor: pointer;
 `;
 
 const SelectorItemContainer = styled.div`
@@ -67,6 +68,7 @@ const WrapperSelectedOption = styled.div`
 
 const WrapperOption = styled.div`
   border: 0.1rem solid black;
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const SelectedOption = ({ active, label, onClick }: OptionProps) => {

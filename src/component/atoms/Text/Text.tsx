@@ -6,8 +6,11 @@ import { ColorKey } from '@/component/utils/color';
 
 interface TextStyleProps {
   fontSize: CSSType.FontSize;
-  fontWeight: CSSType.FontWeight;
+  fontWeight?: CSSType.FontWeight;
   color: ColorKey;
+  padding?: CSSType.Padding;
+  margin?: CSSType.Margin;
+  display?: CSSType.Display;
 }
 
 interface TextProps extends TextStyleProps {
@@ -18,6 +21,8 @@ interface TextProps extends TextStyleProps {
 const StyledDiv = styled.div<TextStyleProps>`
   font-size: ${({ fontSize }) => fontSize};
   color: ${({ color }) => color};
+  padding: ${({ padding }) => padding};
+  margin: ${({ margin }) => margin};
 `;
 
 const Text = ({
@@ -26,10 +31,12 @@ const Text = ({
   color,
   children,
   style,
+  display,
   ...props
 }: TextProps) => {
   return (
     <StyledDiv
+      display={display}
       fontSize={fontSize}
       fontWeight={fontWeight}
       color={color}
