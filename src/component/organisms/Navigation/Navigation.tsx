@@ -4,19 +4,11 @@ import styled from 'styled-components';
 import { Searchbox } from '@/component/molecules';
 import { Image } from '@/component/atoms';
 
-interface ContainerStyleProps {
-  spaceX?: number;
-}
-
-interface Navagation extends ContainerStyleProps {}
-
-const Container = styled.div<ContainerStyleProps>`
+const Container = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.darkBlue};
-  padding: ${({ spaceX }) => (spaceX ? `0 ${(100 - spaceX) / 2}%` : `0 0`)};
 `;
 
 const ImageContainer = styled.div`
@@ -29,9 +21,9 @@ const SearchboxContainer = styled.div`
   align-self: flex-end;
 `;
 
-const Navigation = ({ spaceX = 100 }: Navagation) => {
+const Navigation = () => {
   return (
-    <Container spaceX={spaceX}>
+    <Container>
       <ImageContainer>
         <Image name="peakLogo" alt="logo" objectFit="contain" />
       </ImageContainer>

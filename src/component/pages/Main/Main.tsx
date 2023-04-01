@@ -1,17 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Navigation, GridMainNews } from '@/component/organisms';
-import { DropdownSelector } from '@/component/molecules';
+import { Navigation, GridMainNews, GridEqualNews } from '@/component/organisms';
+import { DropdownSelector, Layout } from '@/component/molecules';
 import { Text } from '@/component/atoms';
-
-const Layout = styled.div`
-  width: 100%;
-`;
-
-const Container = styled.div`
-  margin: 5rem 10%;
-`;
 
 const TopicSelector = styled.div`
   display: flex;
@@ -32,8 +24,10 @@ const Main = () => {
 
   return (
     <Layout>
-      <Navigation spaceX={80} />
-      <Container>
+      <Layout.Header>
+        <Navigation />
+      </Layout.Header>
+      <Layout.Body>
         <TopicSelector>
           <Text fontSize="6rem" color="black" fontWeight={'bold'}>
             Top Stories
@@ -45,7 +39,13 @@ const Main = () => {
           />
         </TopicSelector>
         <GridMainNews />
-      </Container>
+        <GridEqualNews />
+        <Text fontSize="6rem" color="black" fontWeight={'bold'}>
+          Sports
+        </Text>
+        <GridEqualNews />
+      </Layout.Body>
+      <Layout.Footer />
     </Layout>
   );
 };
