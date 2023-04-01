@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
+  position: relative;
   width: 100%;
 `;
 
@@ -14,10 +15,14 @@ const StyledHeader = styled.div`
 
 const StyledBody = styled.div`
   width: 80%;
+  min-height: 100vh;
   margin: 5rem auto;
 `;
 
 const StyledFooter = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
   background-color: ${({ theme }) => theme.colors.darkBlue};
   width: 100%;
   height: 20rem;
@@ -38,7 +43,7 @@ const Footer = (props: React.PropsWithChildren) => {
 const Layout = (props: React.PropsWithChildren) => {
   return (
     <StyledDiv>
-      <div {...props} />
+      <React.Fragment {...props} />
     </StyledDiv>
   );
 };
