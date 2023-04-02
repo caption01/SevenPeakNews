@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { Icon, Input } from '@/component/atoms';
+import { useSearchbox } from '@/hook';
 
 interface BoxStyledProps {
   active: boolean;
 }
 
 interface SearchboxProps {
-  search?: string;
+  intitalValue?: string | string[];
   onSearchChange?: (val: string) => void;
 }
 
@@ -35,10 +36,14 @@ const IconWrapper = styled.div`
   transform: translate(50%, -50%);
 `;
 
-const Searchbox = ({ search = '', onSearchChange }: SearchboxProps) => {
+const Searchbox = ({ intitalValue, onSearchChange }: SearchboxProps) => {
   const [active, setActive] = useState(false);
 
+  const search = useSearchbox((state) => state.search);
+  const setSearch = useSearchbox((state) => state.setSearch);
+
   const onSearchboxChange = (value: string) => {
+    setSearch(value);
     onSearchChange?.(value);
   };
 
@@ -49,6 +54,11 @@ const Searchbox = ({ search = '', onSearchChange }: SearchboxProps) => {
   const close = () => {
     setActive(false);
   };
+
+  useEffect(() => {
+    if (Array.isArray(intitalValue) || !intitalValue) return;
+    setSearch(intitalValue);
+  }, [setSearch, intitalValue]);
 
   return (
     <Box active={active}>

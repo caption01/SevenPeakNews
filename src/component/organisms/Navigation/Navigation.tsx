@@ -31,7 +31,6 @@ const Navigation = () => {
   const { search: querySearch = '' } = router.query;
 
   const search = useSearchbox((state) => state.search);
-  const setSearch = useSearchbox((state) => state.setSearch);
   const clearSearch = useSearchbox((state) => state.clearSearch);
 
   const timer = useRef<any>(undefined);
@@ -46,7 +45,7 @@ const Navigation = () => {
   const goToSearchPage = useCallback(
     (newSearch: string) => {
       if (!newSearch) return;
-      console.log('go to search page');
+
       router.push({
         pathname: '/result',
         query: {
@@ -56,11 +55,6 @@ const Navigation = () => {
     },
     [router]
   );
-
-  useEffect(() => {
-    if (Array.isArray(querySearch)) return;
-    setSearch(querySearch);
-  }, [setSearch, querySearch]);
 
   useEffect(() => {
     if (timer.current) {
@@ -81,7 +75,7 @@ const Navigation = () => {
         </Link>
       </ImageContainer>
       <SearchboxContainer>
-        <Searchbox search={search} onSearchChange={setSearch} />
+        <Searchbox intitalValue={querySearch} />
       </SearchboxContainer>
     </Container>
   );
