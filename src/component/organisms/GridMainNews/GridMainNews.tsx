@@ -33,6 +33,8 @@ const GridMainContainer = styled.div`
 `;
 
 const GridMainNews = () => {
+  const newsId =
+    'sport/2022/oct/07/cricket-jos-buttler-primed-for-england-comeback-while-phil-salt-stays-focused';
   const newsTitle =
     'News of indictment catches Trump and his team off guard Trump and his team off guard Trump and his team off guard';
   const bodyText =
@@ -45,6 +47,7 @@ const GridMainNews = () => {
         height="60rem"
         image="https://media.guim.co.uk/2b3d92521a3718880cf867b831357a6b8c605534/0_0_2816_1691/500.jpg"
         alt="image"
+        id={newsId}
         title={newsTitle}
         describe={bodyText}
       />
@@ -52,16 +55,28 @@ const GridMainNews = () => {
         className="two"
         height="40rem"
         image="https://media.guim.co.uk/2b3d92521a3718880cf867b831357a6b8c605534/0_0_2816_1691/500.jpg"
+        id={newsId}
         title={newsTitle}
       />
       <NewsCard
         className="three"
         height="40rem"
         image="https://media.guim.co.uk/2b3d92521a3718880cf867b831357a6b8c605534/0_0_2816_1691/500.jpg"
+        id={newsId}
         title={newsTitle}
       />
-      <NewsCard className="four" title={newsTitle} isShowPeakImage={false} />
-      <NewsCard className="five" title={newsTitle} isShowPeakImage={false} />
+      <NewsCard
+        className="four"
+        id={newsId}
+        title={newsTitle}
+        isShowPeakImage={false}
+      />
+      <NewsCard
+        className="five"
+        id={newsId}
+        title={newsTitle}
+        isShowPeakImage={false}
+      />
     </GridMainContainer>
   );
 };

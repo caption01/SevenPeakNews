@@ -15,6 +15,7 @@ interface CardStyleProps {
 
 interface CardProps extends CardStyleProps {
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
 const CardContainer = styled.div<CardStyleProps>`
@@ -24,6 +25,16 @@ const CardContainer = styled.div<CardStyleProps>`
   padding: ${({ padding }) => padding};
   margin: ${({ margin }) => margin};
   background-color: ${({ backgroundColor }) => backgroundColor};
+
+  cursor: ${({ onClick }) => onClick && 'pointer'};
+
+  transition: all 0.2s;
+
+  &:hover {
+    transform: ${({ onClick }) => onClick && 'translateY(-0.5rem)'};
+    box-shadow: ${({ onClick }) =>
+      onClick && 'rgba(0, 0, 0, 0.35) 0rem 0.5rem 1.5rem'};
+  }
 `;
 
 const Card = ({
@@ -33,10 +44,12 @@ const Card = ({
   padding,
   margin,
   backgroundColor,
+  onClick = undefined,
   children,
   ...props
 }: CardProps) => {
   const { colors } = useTheme();
+
   let bgColor;
 
   if (backgroundColor) {
@@ -51,6 +64,7 @@ const Card = ({
       margin={margin}
       position={position}
       backgroundColor={bgColor}
+      onClick={onClick}
       {...props}
     >
       {children}

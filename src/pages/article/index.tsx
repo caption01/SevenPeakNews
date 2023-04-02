@@ -7,7 +7,6 @@ const ArticlePage = () => {
   const router = useRouter();
   const query = router.query;
 
-  console.log({ query });
   const newsId = query?.newsId;
 
   return (

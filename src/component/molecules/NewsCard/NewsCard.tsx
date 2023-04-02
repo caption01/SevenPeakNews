@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { isEmpty } from 'lodash';
+import { useRouter } from 'next/router';
 
 import { Card, Image, ImageProps, Text, Spacer } from 'src/component/atoms';
 import * as CSSType from 'src/component/utils/csstype';
@@ -37,12 +38,19 @@ const NewsCard = ({
   height = '30rem',
   image = '',
   alt = '',
+  id = '',
   title = '',
   describe = '',
   isShowPeakImage = false,
   ...props
 }) => {
+  const router = useRouter();
+
   let imageProps = {} as ImageProps;
+
+  const goToArticle = (): void => {
+    router.push(`/article?newsId=${id}`);
+  };
 
   if (image) {
     imageProps = {
@@ -65,14 +73,13 @@ const NewsCard = ({
     };
   }
 
-  console.log({ imageProps });
-
   return (
     <Card
       width={width}
       height={'auto'}
       margin="1rem"
       backgroundColor={'darkBlue'}
+      onClick={goToArticle}
       {...props}
     >
       {!isEmpty(imageProps) && (
