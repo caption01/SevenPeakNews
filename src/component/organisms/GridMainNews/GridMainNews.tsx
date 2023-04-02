@@ -60,8 +60,8 @@ const GridMainNews = () => {
         image="https://media.guim.co.uk/2b3d92521a3718880cf867b831357a6b8c605534/0_0_2816_1691/500.jpg"
         title={newsTitle}
       />
-      <NewsCard className="four" title={newsTitle} />
-      <NewsCard className="five" title={newsTitle} />
+      <NewsCard className="four" title={newsTitle} isShowPeakImage={false} />
+      <NewsCard className="five" title={newsTitle} isShowPeakImage={false} />
     </GridMainContainer>
   );
 };

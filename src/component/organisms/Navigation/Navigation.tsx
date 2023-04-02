@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 import { Searchbox } from '@/component/molecules';
 import { Image } from '@/component/atoms';
@@ -25,7 +26,9 @@ const Navigation = () => {
   return (
     <Container>
       <ImageContainer>
-        <Image name="peakLogo" alt="logo" objectFit="contain" />
+        <Link href={'/'}>
+          <Image name="peakLogo" alt="logo" objectFit="contain" />
+        </Link>
       </ImageContainer>
       <SearchboxContainer>
         <Searchbox />

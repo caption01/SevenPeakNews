@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { isEmpty } from 'lodash';
 
 import { Card, Image, ImageProps, Text, Spacer } from 'src/component/atoms';
 import * as CSSType from 'src/component/utils/csstype';
@@ -64,6 +65,8 @@ const NewsCard = ({
     };
   }
 
+  console.log({ imageProps });
+
   return (
     <Card
       width={width}
@@ -72,7 +75,7 @@ const NewsCard = ({
       backgroundColor={'darkBlue'}
       {...props}
     >
-      {!!imageProps && (
+      {!isEmpty(imageProps) && (
         <ImageContainer height={height}>
           <Image {...imageProps} alt={imageProps.alt} />
         </ImageContainer>
