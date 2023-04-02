@@ -7,6 +7,7 @@ const colors = {
   green: '#00ff00',
   yello: '#ffff00',
   lightBlue: '#00ffff',
+  grey: '#D3D3D3',
 };
 
 type ColorKey = keyof typeof colors;
