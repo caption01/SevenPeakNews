@@ -12,7 +12,7 @@ interface ArticleProps {
 
 const GridArticleContainer = styled.div`
   display: grid;
-  gap: 2rem;
+  gap: 4rem;
   grid-template-columns: 2fr 1fr;
 `;
 
