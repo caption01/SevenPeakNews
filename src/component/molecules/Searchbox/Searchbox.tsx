@@ -7,6 +7,11 @@ interface BoxStyledProps {
   active: boolean;
 }
 
+interface SearchboxProps {
+  search?: string;
+  onSearchChange?: (val: string) => void;
+}
+
 const Box = styled.div<BoxStyledProps>`
   position: relative;
   display: flex;
@@ -30,12 +35,11 @@ const IconWrapper = styled.div`
   transform: translate(50%, -50%);
 `;
 
-const Searchbox = () => {
+const Searchbox = ({ search = '', onSearchChange }: SearchboxProps) => {
   const [active, setActive] = useState(false);
-  const [search, setSearch] = useState('');
 
   const onSearchboxChange = (value: string) => {
-    setSearch(value);
+    onSearchChange?.(value);
   };
 
   const open = () => {

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { delay } from 'lodash';
 
 import { Searchbox } from '@/component/molecules';
 import { Image } from '@/component/atoms';
+import { useSearchbox } from '@/hook';
 
 const Container = styled.div`
   position: relative;
@@ -23,15 +26,62 @@ const SearchboxContainer = styled.div`
 `;
 
 const Navigation = () => {
+  const router = useRouter();
+
+  const { search: querySearch = '' } = router.query;
+
+  const search = useSearchbox((state) => state.search);
+  const setSearch = useSearchbox((state) => state.setSearch);
+  const clearSearch = useSearchbox((state) => state.clearSearch);
+
+  const timer = useRef<any>(undefined);
+
+  const goToMainPage = () => {
+    clearSearch();
+    router.push({
+      pathname: '/',
+    });
+  };
+
+  const goToSearchPage = useCallback(
+    (newSearch: string) => {
+      if (!newSearch) return;
+      console.log('go to search page');
+      router.push({
+        pathname: '/result',
+        query: {
+          search: newSearch,
+        },
+      });
+    },
+    [router]
+  );
+
+  useEffect(() => {
+    if (Array.isArray(querySearch)) return;
+    setSearch(querySearch);
+  }, [setSearch, querySearch]);
+
+  useEffect(() => {
+    if (timer.current) {
+      clearTimeout(timer.current);
+    }
+
+    timer.current = delay(() => {
+      if (search === querySearch) return;
+      goToSearchPage(search);
+    }, 1000);
+  }, [search, querySearch, goToSearchPage]);
+
   return (
     <Container>
       <ImageContainer>
-        <Link href={'/'}>
+        <Link href={'/'} onClick={goToMainPage}>
           <Image name="peakLogo" alt="logo" objectFit="contain" />
         </Link>
       </ImageContainer>
       <SearchboxContainer>
-        <Searchbox />
+        <Searchbox search={search} onSearchChange={setSearch} />
       </SearchboxContainer>
     </Container>
   );
