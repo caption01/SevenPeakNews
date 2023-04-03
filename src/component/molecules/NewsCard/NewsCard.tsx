@@ -80,6 +80,7 @@ const NewsCard = ({
       margin="1rem"
       backgroundColor={'darkBlue'}
       onClick={goToArticle}
+      padding={'0 0 1rem 0'}
       {...props}
     >
       {!isEmpty(imageProps) && (
