@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { Navigation, GridMainNews, GridEqualNews } from '@/component/organisms';
@@ -22,14 +22,20 @@ const Main = () => {
 
   const selectedOptions = useDropdown((state) => state.selected);
 
+  const orderByValue = useMemo(() => selectedOptions.value, [selectedOptions]);
+
   const options = [
     { value: NEW_FIRST, label: 'Newest First' },
     { value: OLD_FIRST, label: 'Oldest First' },
   ];
 
   useEffect(() => {
-    fetchNews(NEW_FIRST);
-  }, []);
+    if (!orderByValue) return;
+    console.log('fetch Effect', { orderByValue });
+    fetchNews(orderByValue);
+  }, [orderByValue]);
+
+  console.log({ data, loading });
 
   return (
     <Layout>
