@@ -6,7 +6,7 @@ import { delay } from 'lodash';
 
 import { Searchbox } from '@/component/molecules';
 import { Image } from '@/component/atoms';
-import { useSearchbox } from '@/hook';
+import { useSearchbox, useQueryParams } from '@/hook';
 
 const Container = styled.div`
   position: relative;
@@ -25,10 +25,15 @@ const SearchboxContainer = styled.div`
   align-self: flex-end;
 `;
 
+type Query = {
+  search: string;
+};
+
 const Navigation = () => {
   const router = useRouter();
+  const { getParams } = useQueryParams<Query>();
 
-  const { search: querySearch = '' } = router.query;
+  const { search: querySearch } = getParams();
 
   const search = useSearchbox((state) => state.search);
   const clearSearch = useSearchbox((state) => state.clearSearch);
@@ -37,8 +42,9 @@ const Navigation = () => {
 
   const goToMainPage = () => {
     clearSearch();
+    const mainPath = `/`;
     router.push({
-      pathname: '/',
+      pathname: mainPath,
     });
   };
 
@@ -46,8 +52,10 @@ const Navigation = () => {
     (newSearch: string) => {
       if (!newSearch) return;
 
+      const resultPath = '/result';
+
       router.push({
-        pathname: '/result',
+        pathname: resultPath,
         query: {
           search: newSearch,
         },

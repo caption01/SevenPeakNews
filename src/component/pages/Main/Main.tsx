@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Navigation, GridMainNews, GridEqualNews } from '@/component/organisms';
 import { DropdownSelector, Layout } from '@/component/molecules';
 import { Text } from '@/component/atoms';
+import { useDropdown } from '@/hook';
 
 const TopicSelector = styled.div`
   display: flex;
@@ -12,9 +13,7 @@ const TopicSelector = styled.div`
 `;
 
 const Main = () => {
-  const onSelect = (value: any, selected: object) => {
-    console.log('hi');
-  };
+  const selectedOptions = useDropdown((state) => state.selected);
 
   const options = [
     { value: 'NEW_FIRST', label: 'Newest First' },
@@ -32,11 +31,7 @@ const Main = () => {
           <Text fontSize="6rem" color="black" fontWeight={'bold'}>
             Top Stories
           </Text>
-          <DropdownSelector
-            options={options}
-            defaultValue={'NEW_FIRST'}
-            onChange={onSelect}
-          />
+          <DropdownSelector options={options} defaultValue={'NEW_FIRST'} />
         </TopicSelector>
         <GridMainNews />
         <GridEqualNews />

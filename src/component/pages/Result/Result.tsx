@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Navigation, GridMainNews, GridEqualNews } from '@/component/organisms';
+import { Navigation, GridEqualNews } from '@/component/organisms';
 import { DropdownSelector, Layout } from '@/component/molecules';
 import { Text } from '@/component/atoms';
 

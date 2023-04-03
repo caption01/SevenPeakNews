@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { Icon, Text } from '@/component/atoms';
+import { useDropdown } from '@/hook';
 
 type OptionValue = number | string | boolean;
 
@@ -22,8 +23,8 @@ interface OptionProps extends OptionStyleProps {
 
 interface SelectorProps {
   options: Option[];
-  defaultValue: number | string | boolean;
-  onChange: (value: OptionValue, selected: Option) => void;
+  defaultValue?: number | string | boolean;
+  onChange?: (value: OptionValue, selected: Option) => void;
 }
 
 const SelectorContainer = styled.div`
@@ -97,26 +98,29 @@ const DropdownSelector = ({
   defaultValue,
   onChange,
 }: SelectorProps) => {
-  const [active, setActive] = useState(false);
-  const [index, setIndex] = useState(-1);
-
-  useEffect(() => {
-    const defaultIndex = findDefaultOptions(options, defaultValue);
-
-    if (defaultIndex !== -1) {
-      setIndex(defaultIndex);
-    }
-  }, [options, defaultValue]);
-
-  const selectOptions = options[index] || {};
+  const active = useDropdown((state) => state.active);
+  const setActive = useDropdown((state) => state.setActive);
+  const setSelected = useDropdown((state) => state.setSelected);
+  const selected = useDropdown((state) => state.selected);
 
   const toggle = () => setActive(!active);
 
-  const onOptionItemClick = (optionIndex: number) => {
-    setActive(!active);
-    setIndex(optionIndex);
+  useEffect(() => {
+    if (!defaultValue) return;
 
-    const selected = options[optionIndex];
+    const selected = findOptions(options, defaultValue);
+
+    if (!!selected) {
+      setSelected(selected);
+    }
+  }, [defaultValue]);
+
+  const onOptionItemClick = (value: OptionValue) => {
+    const selected = findOptions(options, value) as Option;
+
+    setActive(!active);
+    setSelected(selected);
+
     onChange?.(selected.value, selected);
   };
 
@@ -124,7 +128,7 @@ const DropdownSelector = ({
     <SelectorContainer>
       <WrapperSelectedOption>
         <SelectedOption
-          label={selectOptions.label}
+          label={selected.label}
           onClick={toggle}
           active={active}
         />
@@ -132,14 +136,14 @@ const DropdownSelector = ({
       <SelectorItemContainer>
         <OptionItemContainer active={active}>
           <WrapperOption>
-            {options.map((option, optionIndex) => {
+            {options.map((option) => {
               const key = `${option.label}-${option.value}`;
               return (
                 <Option
                   key={key}
                   label={option.label}
                   active={false}
-                  onClick={() => onOptionItemClick(optionIndex)}
+                  onClick={() => onOptionItemClick(option.value)}
                 />
               );
             })}
@@ -150,11 +154,8 @@ const DropdownSelector = ({
   );
 };
 
-const findDefaultOptions = (
-  option: Option[] = [],
-  defaultValue: OptionValue
-) => {
-  return option.findIndex((item) => item.value === defaultValue);
+const findOptions = (option: Option[] = [], value: OptionValue) => {
+  return option.find((item) => item.value === value);
 };
 
 export default DropdownSelector;
