@@ -1,13 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import { map } from 'lodash';
 
 import { Text, Image, Spacer } from '@/component/atoms';
 
-interface ArticleProps {
+export type ArticleBody = {
+  element: string;
+  type: string;
+  html: string;
+};
+
+export type ArticleItem = {
   publicationDate: string;
   title: string;
   image: string;
-  body: [];
+  body: ArticleBody[];
+};
+interface ArticleProps {
+  article: ArticleItem;
 }
 
 const GridArticleContainer = styled.div`
@@ -20,6 +30,7 @@ const ImageContainer = styled.div`
   position: relative;
   width: 100%;
   height: 30rem;
+  background-color: ${({ theme }) => theme.colors.darkBlue};
 `;
 
 const TextWrapper = styled.div`
@@ -31,8 +42,7 @@ const TextWrapper = styled.div`
   }
 `;
 
-const GridArticleNews = ({ article }: { article: ArticleProps }) => {
-  const body = article.body;
+const GridArticleNews = ({ article }: ArticleProps) => {
   return (
     <React.Fragment>
       <GridArticleContainer>
@@ -55,7 +65,7 @@ const GridArticleNews = ({ article }: { article: ArticleProps }) => {
 
       <GridArticleContainer>
         <div>
-          {body.map((item, index) => (
+          {map(article.body, (item, index) => (
             <TextWrapper key={index}>
               <Text fontSize={'3rem'} color="black">
                 <div dangerouslySetInnerHTML={{ __html: item.html }} />

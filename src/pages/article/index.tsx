@@ -7,11 +7,11 @@ const ArticlePage = () => {
   const router = useRouter();
   const query = router.query;
 
-  const newsId = query?.newsId;
+  const newsId = query?.newsId as string;
 
   return (
     <>
-      <Article />
+      <Article newsId={newsId} />
     </>
   );
 };
