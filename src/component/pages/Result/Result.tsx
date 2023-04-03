@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Navigation, GridEqualNews } from '@/component/organisms';
 import { DropdownSelector, Layout } from '@/component/molecules';
 import { Text } from '@/component/atoms';
+import { NEW_FIRST, OLD_FIRST } from '@/component/utils/constant';
 
 const TopicSelector = styled.div`
   display: flex;
@@ -18,9 +19,8 @@ const Result = () => {
   };
 
   const options = [
-    { value: 'NEW_FIRST', label: 'Newest First' },
-    { value: 'OLD_FIRST', label: 'Oldest First' },
-    { value: 'POPULAR_FIRST', label: 'Most Popular' },
+    { value: NEW_FIRST, label: 'Newest First' },
+    { value: OLD_FIRST, label: 'Oldest First' },
   ];
 
   return (
@@ -35,7 +35,7 @@ const Result = () => {
           </Text>
           <DropdownSelector
             options={options}
-            defaultValue={'NEW_FIRST'}
+            defaultValue={NEW_FIRST}
             onChange={onSelect}
           />
         </TopicSelector>
