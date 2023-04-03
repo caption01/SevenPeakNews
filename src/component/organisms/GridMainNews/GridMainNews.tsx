@@ -1,7 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+import { isEmpty } from 'lodash';
 
 import { NewsCard } from '@/component/molecules';
+import { getSafeUndefind } from '@/component/utils/helper';
+
+export type NewsData = {
+  id: string;
+  title: string;
+  describe: string;
+  image: string;
+};
+
+interface MainNewsProps {
+  news: NewsData[];
+}
 
 const GridMainContainer = styled.div`
   display: grid;
@@ -32,49 +45,54 @@ const GridMainContainer = styled.div`
   }
 `;
 
-const GridMainNews = () => {
-  const newsId =
-    'sport/2022/oct/07/cricket-jos-buttler-primed-for-england-comeback-while-phil-salt-stays-focused';
-  const newsTitle =
-    'News of indictment catches Trump and his team off guard Trump and his team off guard Trump and his team off guard';
-  const bodyText =
-    'An article headlined “SNP’s Nicolson cleared of bullying ex-minister Dorries on Twitter” (30 March, p17) reported that it was understood John Nicolson MP had been cleared by parliament’s independent complaints and grievance scheme over tweets regarding the then culture secretary Nadine Dorries. Shortly after publication, the parliamentary standards commissioner, Daniel Greenberg, issued a statement saying that the case was “ongoing, and no decision has yet been made”.';
+const GridMainNews = ({ news = [] }: MainNewsProps) => {
+  if (isEmpty(news)) {
+    return <div />;
+  }
+
+  let [one, two, three, four, five] = news;
+
+  one = getSafeUndefind(one, {});
+  two = getSafeUndefind(two, {});
+  three = getSafeUndefind(three, {});
+  four = getSafeUndefind(four, {});
+  five = getSafeUndefind(five, {});
 
   return (
     <GridMainContainer>
       <NewsCard
+        id={one.id}
+        title={one.title}
+        describe={one.describe}
+        image={one.image}
         className="one"
         height="60rem"
-        image="https://media.guim.co.uk/2b3d92521a3718880cf867b831357a6b8c605534/0_0_2816_1691/500.jpg"
         alt="image"
-        id={newsId}
-        title={newsTitle}
-        describe={bodyText}
       />
       <NewsCard
+        id={two.id}
+        title={two.title}
+        image={two.image}
         className="two"
         height="40rem"
-        image="https://media.guim.co.uk/2b3d92521a3718880cf867b831357a6b8c605534/0_0_2816_1691/500.jpg"
-        id={newsId}
-        title={newsTitle}
       />
       <NewsCard
+        id={three.id}
+        title={three.title}
+        image={three.image}
         className="three"
         height="40rem"
-        image="https://media.guim.co.uk/2b3d92521a3718880cf867b831357a6b8c605534/0_0_2816_1691/500.jpg"
-        id={newsId}
-        title={newsTitle}
       />
       <NewsCard
+        id={four.id}
+        title={four.title}
         className="four"
-        id={newsId}
-        title={newsTitle}
         isShowPeakImage={false}
       />
       <NewsCard
+        id={five.id}
+        title={five.title}
         className="five"
-        id={newsId}
-        title={newsTitle}
         isShowPeakImage={false}
       />
     </GridMainContainer>
