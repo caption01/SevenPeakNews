@@ -24,7 +24,7 @@ async function fetch(
 ): Promise<FetchResponse> {
   const params = {
     section: section,
-    'current-page': 1,
+    page: 1,
     'page-size': 10,
     'order-by': orderBy,
     'show-elements': 'thumbnail,body',

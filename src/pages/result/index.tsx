@@ -7,11 +7,9 @@ const ResultPage = () => {
   const router = useRouter();
   const { search } = router.query;
 
-  console.log('search with', { search });
-
   return (
     <>
-      <Result />
+      <Result search={search as string} />
     </>
   );
 };

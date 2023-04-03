@@ -35,8 +35,6 @@ const Main = () => {
     fetchNews(orderByValue);
   }, [orderByValue]);
 
-  console.log({ data, loading });
-
   return (
     <Layout>
       <Layout.Header>
