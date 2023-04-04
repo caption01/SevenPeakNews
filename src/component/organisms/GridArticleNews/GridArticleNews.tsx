@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { map } from 'lodash';
 
 import { Text, Image, Spacer } from '@/component/atoms';
+import { devices } from '@/component/utils/styled-component';
 
 export type ArticleBody = {
   element: string;
@@ -23,7 +24,12 @@ interface ArticleProps {
 const GridArticleContainer = styled.div`
   display: grid;
   gap: 4rem;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr;
+
+  @media ${devices.desktop} {
+    grid-template-columns: 2fr 1fr;
+    grid-auto-flow: row;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -31,6 +37,15 @@ const ImageContainer = styled.div`
   width: 100%;
   height: 30rem;
   background-color: ${({ theme }) => theme.colors.darkBlue};
+
+  @media ${devices.tablet} {
+    width: 80%;
+    justify-self: center;
+  }
+
+  @media ${devices.desktop} {
+    width: 100%;
+  }
 `;
 
 const TextWrapper = styled.div`

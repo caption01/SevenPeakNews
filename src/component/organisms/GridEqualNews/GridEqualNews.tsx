@@ -5,6 +5,7 @@ import { isEmpty, map } from 'lodash';
 import { NewsCard } from '@/component/molecules';
 
 import { getSafeUndefind } from '@/component/utils/helper';
+import { devices } from '@/component/utils/styled-component';
 
 export type NewsData = {
   id: string;
@@ -21,7 +22,15 @@ const GridEqualContainer = styled.div`
   display: grid;
   gap: 2rem;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1, 1fr);
+
+  @media ${devices.tablet} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media ${devices.desktop} {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 const GridEqualNews = ({ news = [] }: EqualNewsProps) => {

@@ -4,6 +4,7 @@ import { isEmpty } from 'lodash';
 
 import { NewsCard } from '@/component/molecules';
 import { getSafeUndefind } from '@/component/utils/helper';
+import { devices } from '@/component/utils/styled-component';
 
 export type NewsData = {
   id: string;
@@ -21,8 +22,11 @@ const GridMainContainer = styled.div`
   gap: 2rem;
 
   grid-template-areas:
-    'one one two three'
-    'one one four five';
+    'one'
+    'two'
+    'three'
+    'four'
+    'five';
 
   .one {
     grid-area: one;
@@ -42,6 +46,20 @@ const GridMainContainer = styled.div`
 
   .five {
     grid-area: five;
+  }
+
+  @media ${devices.tablet} {
+    grid-template-areas:
+      'one one'
+      'one one'
+      'two three'
+      'four five';
+  }
+
+  @media ${devices.desktop} {
+    grid-template-areas:
+      'one one two three'
+      'one one four five';
   }
 `;
 
