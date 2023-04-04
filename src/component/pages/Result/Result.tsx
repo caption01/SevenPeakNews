@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Navigation, GridEqualNews } from '@/component/organisms';
 import { DropdownSelector, Layout } from '@/component/molecules';
-import { Text } from '@/component/atoms';
+import { Text, Spinner } from '@/component/atoms';
 import { NEW_FIRST, OLD_FIRST } from '@/component/utils/constant';
 import { useScroll, useDropdown } from '@/hook';
 
@@ -19,6 +19,20 @@ const TopicSelector = styled.div`
   align-items: center;
   margin-bottom: 2.5rem;
 `;
+
+const SpinerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+const CenterSpinner = () => {
+  return (
+    <SpinerContainer>
+      <Spinner size="5rem" />
+    </SpinerContainer>
+  );
+};
 
 const Result = ({ search }: ResultProps) => {
   const data = useFetchResult((state) => state.data);
@@ -73,6 +87,7 @@ const Result = ({ search }: ResultProps) => {
           />
         </TopicSelector>
         <GridEqualNews news={data} />
+        {loading && <CenterSpinner />}
       </Layout.Body>
       <Layout.Footer />
     </Layout>

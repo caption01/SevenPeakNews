@@ -1,8 +1,9 @@
 import { create } from 'zustand';
 import { map } from 'lodash';
 
-import { axios } from '@/component/utils/axios';
 import { NewsData } from '@/component/organisms';
+import { axios } from '@/component/utils/axios';
+import { pause } from '@/component/utils/helper';
 
 type FetchResponse = {
   data: any;
@@ -63,6 +64,7 @@ export const useFetchResult = create<State>((set, get) => ({
   limit: false,
   fetchResult: async (search: string, orderBy: string) => {
     set({ loading: true });
+    pause(1000);
 
     const fetchCondition = {
       search,
@@ -89,6 +91,8 @@ export const useFetchResult = create<State>((set, get) => ({
   },
   fetchNextResult: async () => {
     set({ loading: true });
+    pause(1000);
+
     const condition = get().condition;
     const data = get().data;
     const limit = get().limit;
