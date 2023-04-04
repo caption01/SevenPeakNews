@@ -5,10 +5,23 @@ import { useRouter } from 'next/router';
 
 import { Card, Image, ImageProps, Text, Spacer } from 'src/component/atoms';
 import * as CSSType from 'src/component/utils/csstype';
+import { ColorKey } from 'src/component/utils/color';
 import { useSearchbox } from '@/hook';
 
 interface StyleDiv {
-  height: CSSType.Height;
+  height?: CSSType.Height;
+}
+
+interface NewCardProps extends StyleDiv {
+  width?: CSSType.Width;
+  image?: string;
+  alt?: string;
+  id?: string;
+  title?: string;
+  describe?: string;
+  isShowPeakImage?: boolean;
+  bottomColor?: ColorKey;
+  className?: any;
 }
 
 const ImageContainer = styled.div<StyleDiv>`
@@ -43,8 +56,9 @@ const NewsCard = ({
   title = '',
   describe = '',
   isShowPeakImage = false,
+  bottomColor = 'red',
   ...props
-}) => {
+}: NewCardProps) => {
   const router = useRouter();
   const clearSearch = useSearchbox((state) => state.clearSearch);
 
@@ -105,7 +119,7 @@ const NewsCard = ({
         </Text>
       </TextContainer>
       <SpacerContainer>
-        <Spacer padding="0.2rem 0" backgroundColor="red" />
+        <Spacer padding="0.2rem 0" backgroundColor={bottomColor} />
       </SpacerContainer>
     </Card>
   );

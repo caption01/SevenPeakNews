@@ -69,6 +69,7 @@ const GridMainNews = ({ news = [] }: MainNewsProps) => {
         height="60rem"
         alt="image"
         isShowPeakImage
+        bottomColor="green"
       />
       <NewsCard
         id={two.id}
@@ -77,6 +78,7 @@ const GridMainNews = ({ news = [] }: MainNewsProps) => {
         className="two"
         height="40rem"
         isShowPeakImage
+        bottomColor="red"
       />
       <NewsCard
         id={three.id}
@@ -85,18 +87,21 @@ const GridMainNews = ({ news = [] }: MainNewsProps) => {
         className="three"
         height="40rem"
         isShowPeakImage
+        bottomColor="yello"
       />
       <NewsCard
         id={four.id}
         title={four.title}
         className="four"
         isShowPeakImage={false}
+        bottomColor="skyBlue"
       />
       <NewsCard
         id={five.id}
         title={five.title}
         className="five"
         isShowPeakImage={false}
+        bottomColor="green"
       />
     </GridMainContainer>
   );
