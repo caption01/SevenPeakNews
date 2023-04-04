@@ -45,7 +45,6 @@ const Main = () => {
 
   useEffect(() => {
     if (!orderByValue) return;
-    console.log('fetch Effect', { orderByValue });
     fetchNews(orderByValue);
   }, [orderByValue]);
 

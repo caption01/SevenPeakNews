@@ -81,6 +81,12 @@ export const useFetchResult = create<State>((set, get) => ({
 
       const resultData = map(resultResponse.data?.response?.results, transform);
 
+      const isLimit = checkIsLitmitResult(
+        fetchCondition.page,
+        resultResponse.data?.response
+      );
+
+      set({ limit: isLimit });
       set({ data: resultData });
     } catch (error) {
       const msg = 'fetch result error';
@@ -90,14 +96,14 @@ export const useFetchResult = create<State>((set, get) => ({
     }
   },
   fetchNextResult: async () => {
-    set({ loading: true });
-    pause(1000);
-
     const condition = get().condition;
     const data = get().data;
     const limit = get().limit;
 
     if (limit) return;
+
+    set({ loading: true });
+    pause(1000);
 
     const nextPage = condition.page + 1;
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Navigation, GridEqualNews } from '@/component/organisms';
@@ -41,29 +41,28 @@ const Result = ({ search }: ResultProps) => {
   const fetchNextResult = useFetchResult((state) => state.fetchNextResult);
   const selectedOption = useDropdown((state) => state.selected);
 
+  const [isMounted, setIsMounted] = useState(false);
+
   const { isBottom } = useScroll({ offsetFromBottom: 20 });
 
   useEffect(() => {
-    if (!search) return;
+    if (!search || !isMounted) return;
 
-    let defaultOrder = NEW_FIRST;
+    const orderBy = selectedOption?.value;
 
-    if (selectedOption?.value) {
-      defaultOrder = selectedOption?.value;
-    }
+    fetchResult(search, orderBy);
+  }, [search, selectedOption]);
 
-    fetchResult(search, defaultOrder);
-  }, [search]);
+  useEffect(() => {
+    fetchResult(search, NEW_FIRST);
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isBottom) {
       fetchNextResult();
     }
   }, [isBottom]);
-
-  const onSelect = (value: any) => {
-    fetchResult(search, value);
-  };
 
   const options = [
     { value: NEW_FIRST, label: 'Newest First' },
@@ -80,11 +79,7 @@ const Result = ({ search }: ResultProps) => {
           <Text fontSize="6rem" color="black" fontWeight={'bold'}>
             Search result
           </Text>
-          <DropdownSelector
-            options={options}
-            defaultValue={NEW_FIRST}
-            onChange={onSelect}
-          />
+          <DropdownSelector options={options} defaultValue={NEW_FIRST} />
         </TopicSelector>
         <GridEqualNews news={data} />
         {loading && <CenterSpinner />}
