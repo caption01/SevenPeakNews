@@ -5,6 +5,7 @@ import { Navigation, GridEqualNews } from '@/component/organisms';
 import { DropdownSelector, Layout } from '@/component/molecules';
 import { Text } from '@/component/atoms';
 import { NEW_FIRST, OLD_FIRST } from '@/component/utils/constant';
+import { useScroll, useDropdown } from '@/hook';
 
 import { useFetchResult } from './useFetchResult';
 
@@ -23,14 +24,30 @@ const Result = ({ search }: ResultProps) => {
   const data = useFetchResult((state) => state.data);
   const loading = useFetchResult((state) => state.loading);
   const fetchResult = useFetchResult((state) => state.fetchResult);
+  const fetchNextResult = useFetchResult((state) => state.fetchNextResult);
+  const selectedOption = useDropdown((state) => state.selected);
+
+  const { isBottom } = useScroll({ offsetFromBottom: 20 });
 
   useEffect(() => {
     if (!search) return;
 
-    fetchResult(search, NEW_FIRST);
+    let defaultOrder = NEW_FIRST;
+
+    if (selectedOption?.value) {
+      defaultOrder = selectedOption?.value;
+    }
+
+    fetchResult(search, defaultOrder);
   }, [search]);
 
-  const onSelect = (value: string) => {
+  useEffect(() => {
+    if (isBottom) {
+      fetchNextResult();
+    }
+  }, [isBottom]);
+
+  const onSelect = (value: any) => {
     fetchResult(search, value);
   };
 
