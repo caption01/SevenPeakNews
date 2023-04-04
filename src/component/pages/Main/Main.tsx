@@ -1,27 +1,12 @@
 import React, { useEffect, useMemo } from 'react';
-import styled from 'styled-components';
 
 import { Navigation, GridMainNews, GridEqualNews } from '@/component/organisms';
-import { Layout, TopicSelector } from '@/component/molecules';
-import { Text, Spinner } from '@/component/atoms';
+import { Layout, TopicSelector, CenterSpinner } from '@/component/molecules';
+import { Text } from '@/component/atoms';
 import { useDropdown } from '@/hook';
 import { NEW_FIRST, OLD_FIRST } from '@/component/utils/constant';
 
 import { useFetchMain } from './useFetchMain';
-
-const SpinerContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-`;
-
-const CenterSpinner = () => {
-  return (
-    <SpinerContainer>
-      <Spinner size="5rem" />
-    </SpinerContainer>
-  );
-};
 
 const Main = () => {
   const data = useFetchMain((state) => state.data);

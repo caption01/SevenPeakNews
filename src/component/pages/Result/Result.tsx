@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 
 import { Navigation, GridEqualNews } from '@/component/organisms';
-import { Layout, TopicSelector } from '@/component/molecules';
-import { Spinner } from '@/component/atoms';
+import { Layout, TopicSelector, CenterSpinner } from '@/component/molecules';
 import { NEW_FIRST, OLD_FIRST } from '@/component/utils/constant';
 import { useScroll, useDropdown } from '@/hook';
 
@@ -12,20 +10,6 @@ import { useFetchResult } from './useFetchResult';
 interface ResultProps {
   search: string;
 }
-
-const SpinerContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-`;
-
-const CenterSpinner = () => {
-  return (
-    <SpinerContainer>
-      <Spinner size="5rem" />
-    </SpinerContainer>
-  );
-};
 
 const Result = ({ search }: ResultProps) => {
   const data = useFetchResult((state) => state.data);
