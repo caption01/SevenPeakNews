@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
 import { create } from 'zustand';
 import { slice } from 'lodash';
 
 import { axios } from '@/component/utils/axios';
-import { GridMainNews, NewsData } from '@/component/organisms';
+import { NewsData } from '@/component/organisms';
+import { pause } from '@/component/utils/helper';
 
 type FetchResponse = {
   data: any;
@@ -31,7 +31,7 @@ async function fetch(
     'show-fields': 'all',
   };
 
-  return await axios.get(path, { params });
+  return axios.get(path, { params });
 }
 
 function transform(data: any): NewsData {
@@ -49,6 +49,8 @@ export const useFetchMain = create<State>((set) => ({
   error: undefined,
   fetchNews: async (orderBy: string) => {
     set({ loading: true });
+
+    await pause(1000);
 
     try {
       const path = '/search';

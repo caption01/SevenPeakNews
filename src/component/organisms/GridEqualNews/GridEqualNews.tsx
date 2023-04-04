@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { isEmpty, map } from 'lodash';
 
 import { NewsCard } from '@/component/molecules';
+
 import { getSafeUndefind } from '@/component/utils/helper';
 
 export type NewsData = {

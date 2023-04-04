@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Navigation, GridMainNews, GridEqualNews } from '@/component/organisms';
 import { DropdownSelector, Layout } from '@/component/molecules';
-import { Text } from '@/component/atoms';
+import { Text, Spinner } from '@/component/atoms';
 import { useDropdown } from '@/hook';
 import { NEW_FIRST, OLD_FIRST } from '@/component/utils/constant';
 
@@ -14,6 +14,20 @@ const TopicSelector = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
+const SpinerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+const CenterSpinner = () => {
+  return (
+    <SpinerContainer>
+      <Spinner size="5rem" />
+    </SpinerContainer>
+  );
+};
 
 const Main = () => {
   const data = useFetchMain((state) => state.data);
@@ -35,6 +49,19 @@ const Main = () => {
     fetchNews(orderByValue);
   }, [orderByValue]);
 
+  const renderNews = () => {
+    return (
+      <>
+        <GridMainNews news={data?.newsTopOneToFive} />
+        <GridEqualNews news={data?.newsTopSixToEight} />
+        <Text fontSize="6rem" color="black" fontWeight={'bold'}>
+          Sports
+        </Text>
+        <GridEqualNews news={data?.sportTopThree} />
+      </>
+    );
+  };
+
   return (
     <Layout>
       <Layout.Header>
@@ -47,12 +74,7 @@ const Main = () => {
           </Text>
           <DropdownSelector options={options} defaultValue={NEW_FIRST} />
         </TopicSelector>
-        <GridMainNews news={data?.newsTopOneToFive} />
-        <GridEqualNews news={data?.newsTopSixToEight} />
-        <Text fontSize="6rem" color="black" fontWeight={'bold'}>
-          Sports
-        </Text>
-        <GridEqualNews news={data?.sportTopThree} />
+        {loading ? <CenterSpinner /> : renderNews()}
       </Layout.Body>
       <Layout.Footer />
     </Layout>
