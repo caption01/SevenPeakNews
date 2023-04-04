@@ -32,7 +32,12 @@ const Main = () => {
       <>
         <GridMainNews news={data?.newsTopOneToFive} />
         <GridEqualNews news={data?.newsTopSixToEight} />
-        <Text fontSize="6rem" color="black" fontWeight={'bold'}>
+        <Text
+          fontSize="6rem"
+          color="black"
+          fontWeight={'bold'}
+          margin={'2rem 0'}
+        >
           Sports
         </Text>
         <GridEqualNews news={data?.sportTopThree} />

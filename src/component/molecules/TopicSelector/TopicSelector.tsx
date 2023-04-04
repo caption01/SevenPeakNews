@@ -12,6 +12,7 @@ interface TopicSelectorProps {
 
 const TopicContainer = styled.div`
   display: flex;
+  margin-bottom: 2rem;
 
   flex-direction: column;
   align-items: stretch;
