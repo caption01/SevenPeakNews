@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 
 import { Card, Image, ImageProps, Text, Spacer } from 'src/component/atoms';
 import * as CSSType from 'src/component/utils/csstype';
+import { useSearchbox } from '@/hook';
 
 interface StyleDiv {
   height: CSSType.Height;
@@ -45,10 +46,12 @@ const NewsCard = ({
   ...props
 }) => {
   const router = useRouter();
+  const clearSearch = useSearchbox((state) => state.clearSearch);
 
   let imageProps = {} as ImageProps;
 
   const goToArticle = (): void => {
+    clearSearch();
     router.push(`/article?newsId=${id}`);
   };
 
