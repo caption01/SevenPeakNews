@@ -2,18 +2,12 @@ import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { Navigation, GridMainNews, GridEqualNews } from '@/component/organisms';
-import { DropdownSelector, Layout } from '@/component/molecules';
+import { Layout, TopicSelector } from '@/component/molecules';
 import { Text, Spinner } from '@/component/atoms';
 import { useDropdown } from '@/hook';
 import { NEW_FIRST, OLD_FIRST } from '@/component/utils/constant';
 
 import { useFetchMain } from './useFetchMain';
-
-const TopicSelector = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
 
 const SpinerContainer = styled.div`
   display: flex;
@@ -67,12 +61,7 @@ const Main = () => {
         <Navigation />
       </Layout.Header>
       <Layout.Body>
-        <TopicSelector>
-          <Text fontSize="6rem" color="black" fontWeight={'bold'}>
-            Top Stories
-          </Text>
-          <DropdownSelector options={options} defaultValue={NEW_FIRST} />
-        </TopicSelector>
+        <TopicSelector options={options} defaultValue={NEW_FIRST} />
         {loading ? <CenterSpinner /> : renderNews()}
       </Layout.Body>
       <Layout.Footer />

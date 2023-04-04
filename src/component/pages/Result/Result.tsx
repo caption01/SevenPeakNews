@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Navigation, GridEqualNews } from '@/component/organisms';
-import { DropdownSelector, Layout } from '@/component/molecules';
-import { Text, Spinner } from '@/component/atoms';
+import { Layout, TopicSelector } from '@/component/molecules';
+import { Spinner } from '@/component/atoms';
 import { NEW_FIRST, OLD_FIRST } from '@/component/utils/constant';
 import { useScroll, useDropdown } from '@/hook';
 
@@ -12,13 +12,6 @@ import { useFetchResult } from './useFetchResult';
 interface ResultProps {
   search: string;
 }
-
-const TopicSelector = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2.5rem;
-`;
 
 const SpinerContainer = styled.div`
   display: flex;
@@ -75,12 +68,8 @@ const Result = ({ search }: ResultProps) => {
         <Navigation />
       </Layout.Header>
       <Layout.Body>
-        <TopicSelector>
-          <Text fontSize="6rem" color="black" fontWeight={'bold'}>
-            Search result
-          </Text>
-          <DropdownSelector options={options} defaultValue={NEW_FIRST} />
-        </TopicSelector>
+        <TopicSelector options={options} defaultValue={NEW_FIRST} />
+
         <GridEqualNews news={data} />
         {loading && <CenterSpinner />}
       </Layout.Body>
