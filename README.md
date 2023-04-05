@@ -4,7 +4,7 @@
 
 ### Tencinal in project
 
-this project was builded from scratch which using **typescript** and choose **Nextjs** to structure folder layer with **atomic design** pattern that seperate on each component level
+this project was builded from scratch which using **Typescript** and choose **Nextjs** to structure folder layer with **Atomic Design** pattern that seperate on each component level and also using **Zustand** to manage state in application flow and component.
 
 ```
 src
